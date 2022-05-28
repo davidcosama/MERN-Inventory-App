@@ -1,6 +1,9 @@
 const express = require('express')
 const http = require('http')
 const socketio = require('socket.io')
+const mongoose = require('mongoose')
+
+const config = require('./config');
 
 const port = process.env.PORT || 5000
 
@@ -17,8 +20,7 @@ io.on("connection", socket => {
 })
 
 // SET UP MONGOOSE
-const mongoose = require('mongoose')
-const dbURL = "mongodb+srv://tridang:ixM619E2bIt931K4@myappcluster0-8j5w1.mongodb.net/test?retryWrites=true&w=majority"
+const dbURL = config.mongoURI;
 
 mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true}, () => {
   console.log("Successfully connected to MongoDB")
