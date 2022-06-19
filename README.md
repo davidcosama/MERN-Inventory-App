@@ -11,11 +11,11 @@
 - Express.js
 - MongoDB
 
-### dependencies
+### Dependencies
 - Socket.io for bi-directional client-server communication
 - Mongoose for elegant MongoDB object modeling
 
 ## To Run
-- In the project directory, `npm install` to install all necessary dependencies
-- `cd src` then `node server` to start the backend node server
-- Go back to the root project directory, `npm start` to start the frontend React client
+- In the backend and frontend directories, `npm install` to install all necessary dependencies
+- In one terminal, `cd backend` then `node server` to start the backend node server
+- In another terminal, `cd frontend` then `npm start` to start the frontend React client
