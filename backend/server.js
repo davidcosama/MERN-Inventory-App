@@ -3,6 +3,7 @@ const http = require('http')
 const socketio = require('socket.io')
 const mongoose = require('mongoose')
 
+const Product = require('./models/Product');
 const config = require('./config');
 
 const port = process.env.PORT || 5000
@@ -24,14 +25,6 @@ const dbURL = config.mongoURI;
 
 mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true}, () => {
   console.log("Successfully connected to MongoDB")
-})
-
-var Product = mongoose.model('Product', {
-  id: Number,
-  category: String,
-  price: String,
-  name: String,
-  instock: Boolean
 })
 
 app.use(express.json())
@@ -56,7 +49,7 @@ app.post('/product/create', async(req, res) => {
       console.log("Broadcasting changes")
       res.sendStatus(200)
     }
-  } catch {
+  } catch (err) {
     res.sendStatus(500)
     console.log(err)
   }
@@ -72,7 +65,7 @@ app.post('/product/update/', async (req, res) => {
       io.emit("updates", req.body)
       res.sendStatus(200)
     }
-  } catch {
+  } catch (err) {
     res.sendStatus(500)
     console.log(err)
   }
@@ -86,7 +79,7 @@ app.post('/product/delete/', async (req, res) => {
       io.emit("updates", req.body)
       res.sendStatus(200)
     }
-  } catch {
+  } catch (err) {
     res.sendStatus(500)
     console.log(err)
   }
